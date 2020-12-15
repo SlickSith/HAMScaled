@@ -1,9 +1,9 @@
 # SWGepub6
 ### forked from SWGEmu Core3
 
-## What is SWGpub6?
+## What is HAMScaled?
 
-Ditto SWGEmu but pub 6
+slick put stuff here
 
 ## Setup guide
 Install Docker -- 
