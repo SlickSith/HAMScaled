@@ -17,7 +17,7 @@ https://nickjanetakis.com/blog/setting-up-docker-for-windows-and-wsl-to-work-fla
 
 ### Git and Docker
 
-`git clone https://github.com/TheArchitect108/swgepub6.git`
+`git clone https://github.com/SlickSith/HAMScaled.git`
 <br/>
 `git submodule update --init --recursive`
 <br/>
