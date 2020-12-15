@@ -1,4 +1,4 @@
-# SWGepub6
+# SWGEMU HAMScaled
 ### forked from SWGEmu Core3
 
 ## What is HAMScaled?
