@@ -41,10 +41,6 @@ RUN curl -L https://github.com/krallin/tini/releases/download/v0.18.0/tini -o /u
 WORKDIR /app
 COPY .git/ ./.git/
 COPY ./MMOCoreORB MMOCoreORB
-COPY ./server/custom_scripts server/custom_scripts/
-COPY ./server/scripts server/scripts/
-COPY ./server/conf server/conf/
-
 
 # This is a hack to make the /app folder the root of it's own
 # git repo. Without this section git will treat is as a submodule

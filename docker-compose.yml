@@ -1,4 +1,4 @@
-version: '3'
+version: '3.7'
 
 volumes:
   mysql:
@@ -23,13 +23,13 @@ services:
       - ./MMOCoreORB/sql:/docker-entrypoint-initdb.d
     restart: always
 
-  swgemu:
+  hamscaled:
     depends_on:
       - database
     build: .
-    image: swgemu:dev
-    hostname: swgemu_server
-    container_name: swgemu_server
+    image: hamscaled:dev
+    hostname: hamscaled_server
+    container_name: hamscaled_server
     ports:
       - "44419:44419"
       - "44419:44419/udp"
