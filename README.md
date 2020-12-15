@@ -7,27 +7,27 @@ slick put stuff here
 
 ## Setup guide
 Install Docker -- 
-https://www.docker.com/products/docker-desktop
+https://docs.docker.com/engine/install/
 
 Enable BuildKit (faster) --
-https://stackoverflow.com/questions/58592259/how-do-you-enable-buildkit-with-docker-compose
+https://docs.docker.com/develop/develop-images/build_enhancements/
 
 Windows Users Follow --
 https://nickjanetakis.com/blog/setting-up-docker-for-windows-and-wsl-to-work-flawlessly#ensure-volume-mounts-work
 
+### TREs
+
+Place the required TREs in `server/tre`. A list can be found under `server/conf/config.lua`.
+
 ### Git and Docker
 
-`git clone https://github.com/SlickSith/HAMScaled.git`
+`git clone https://github.com/slicksith/hamscaled.git`
 <br/>
 `git submodule update --init --recursive`
 <br/>
 `docker-compose build` * may take 15-20 mins
 <br/>
 `docker-compose up -d`
-
-### TREs
-
-Place the required TREs in `server/tre`. A list can be found under `server/conf/config.lua`.
 
 ### Database
 
