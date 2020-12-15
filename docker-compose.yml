@@ -20,7 +20,7 @@ services:
       - MYSQL_PASSWORD=swgemu-sql
     volumes:
       - mysql:/var/lib/mysql
-      - ./sql:/docker-entrypoint-initdb.d
+      - ./MMOCoreORB/sql:/docker-entrypoint-initdb.d
     restart: always
 
   swgemu:
