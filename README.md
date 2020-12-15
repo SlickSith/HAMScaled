@@ -7,10 +7,10 @@ slick put stuff here
 
 ## Setup guide
 Install Docker -- 
-https://docs.docker.com/engine/install/
+https://www.docker.com/products/docker-desktop
 
 Enable BuildKit (faster) --
-https://docs.docker.com/develop/develop-images/build_enhancements/
+https://stackoverflow.com/questions/58592259/how-do-you-enable-buildkit-with-docker-compose
 
 Windows Users Follow --
 https://nickjanetakis.com/blog/setting-up-docker-for-windows-and-wsl-to-work-flawlessly#ensure-volume-mounts-work
