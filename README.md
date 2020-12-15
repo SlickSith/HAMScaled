@@ -1,12 +1,59 @@
-# SWGEmu Core3
+# SWGepub6
+### forked from SWGEmu Core3
 
-## What is SWGEmu?
+## What is SWGpub6?
 
-Star Wars Galaxies was a massively multi-player online role playing game introduced by Sony Online Entertainment in the year 2003 and shut down in 2011.
-It is this game the SWGEmu project focuses to recreate at a specific milestone referred to as Pre-CU, or Pre-Combat Upgrade. The Combat Upgrade was a set of game changes which radically changed the game-play, to the dislike of thousands of players. These changes led to the founding of this project, in an attempt to "recreate" the game as it was during the Pre-CU era.
-At SWGEmu, Emulator refers to the software the SWGEmu team is building. This Emulator is meant to imitate Sony Online Entertainment's server-side software, which hosted the galaxies of Star Wars Galaxies during the Pre-CU era.
+Ditto SWGEmu but pub 6
 
-## How to Build
+## Setup guide
+Install Docker -- 
+https://docs.docker.com/engine/install/
+
+Enable BuildKit (faster) --
+https://docs.docker.com/develop/develop-images/build_enhancements/
+
+Windows Users Follow --
+https://nickjanetakis.com/blog/setting-up-docker-for-windows-and-wsl-to-work-flawlessly#ensure-volume-mounts-work
+
+### Git and Docker
+
+`git clone https://github.com/TheArchitect108/swgepub6.git`
+<br/>
+`git submodule update --init --recursive`
+<br/>
+`docker-compose build` * may take 15-20 mins
+<br/>
+`docker-compose up -d`
+
+### TREs
+
+Place the required TREs in `server/tre`. A list can be found under `server/conf/config.lua`.
+
+### Database
+
+You can connect to the MySQL database using localhost:3306 using any MySQL compatible tool. The root password can be found in the docker-compose.yml
+
+Restore swgemu.sql and run admin_account.sql if the server does not start automatically.
+
+### Server Defaults
+
+Scripts included in the server directory will be copyed over and loaded.
+Default login: admin
+Default password: admin
+
+
+### Troubleshooting Docker
+If the server does not start on first run, it's likely the database. Make sure the sql files were ran properly.
+
+You can use the following commands to troubleshoot more indepth --
+
+`docker container ls`
+<br/>
+`docker attach container_id`
+<br/>
+`docker container kill container_id`
+
+## Old Way
 
 ### Dependencies
 
@@ -35,7 +82,7 @@ At SWGEmu, Emulator refers to the software the SWGEmu team is building. This Emu
 
         mkdir -p ~/git
         cd ~/git
-        git clone http://review.swgemu.com/Core3
+        git clone https://github.com/TheArchitect108/swgepub6/
   * Build Core3 with 8 threads
 
         cd MMOCoreORB
@@ -44,14 +91,21 @@ At SWGEmu, Emulator refers to the software the SWGEmu team is building. This Emu
 
         mysql -h<MYSQLHOST> -u<MYSQLUSER> -p<MYSQLPASSWORD> < sql/swgemu.sql
 
-## How to Run
+### How to Run
 
-    cd ~/git/Core3/MMOCoreORB/bin
+    cd ~/git/swgepub6/MMOCoreORB/bin
     ./core3
+
+## Gratitude
+
+Big thanks to all the developers and contributors to SWGEmu, Core3, and Engine3.
+
+@thmhoag for his original work to dockerize things -- https://github.com/thmhoag/swgemu-docker
+
 
 ## License
 
-    Copyright (C) 2019 SWGEmu
+    Copyright (C) 2020 SWGEmu
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU Affero General Public License as published by the Free Software Foundation,
@@ -63,5 +117,3 @@ At SWGEmu, Emulator refers to the software the SWGEmu team is building. This Emu
 
     You should have received a copy of the GNU Affero General Public License along with this program.
     If not, see <http://www.gnu.org/licenses/>.
-
-For more information, see https://review.swgemu.com.
