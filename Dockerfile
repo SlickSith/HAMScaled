@@ -39,7 +39,8 @@ ENV CCACHE_DIR=/ccache
 RUN curl -L https://github.com/krallin/tini/releases/download/v0.18.0/tini -o /usr/bin/tini
 
 WORKDIR /app
-COPY .git/ ./.git/
+COPY .git/modules/MMOCoreORB/utils/ ./.git/modules/MMOCoreORB/utils/
+COPY .git/config ./.git/config
 COPY ./MMOCoreORB MMOCoreORB
 
 # This is a hack to make the /app folder the root of it's own
