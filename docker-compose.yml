@@ -9,8 +9,8 @@ volumes:
 services:
   database:
     image: mysql:5.7.28
-    hostname: swgemu_database
-    container_name: swgemu_database
+    hostname: hamscaled_database
+    container_name: hamscaled_database
     ports:
       - "3306:3306"
     environment:
