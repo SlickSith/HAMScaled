@@ -63,15 +63,15 @@
 
 --Jedi System Features
 --Values: "hologrind", "village"
---feature("jediSystem", "hologrind")
+feature("jediSystem", "hologrind")
 
 --Armor Protection
 --Values: "normal", "minisuits"
---feature("armorProtection", "minisuits")
+feature("armorProtection", "normal")
 
 --GCW System
 --Values: "specialForces", "TEF"
---feature("gcwSystem", "specialForces")
+feature("gcwSystem", "TEF")
 
 --************************
 --Broken Skillmods Section

@@ -24,9 +24,8 @@ public:
 			return INVALIDLOCOMOTION;
 
 		if (isWearingArmor(creature)) {
-			return NOJEDIARMOR;
+			//return NOJEDIARMOR;
 		}
-
 		ManagedReference<SceneObject*> object = server->getZoneServer()->getObject(target);
 
 		// Fail if target is not a player...

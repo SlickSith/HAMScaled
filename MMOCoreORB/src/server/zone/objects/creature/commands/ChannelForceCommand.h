@@ -28,8 +28,8 @@ public:
 			return GENERALERROR;
 
 		if (isWearingArmor(creature)) {
-			return NOJEDIARMOR;
-		}
+			//return NOJEDIARMOR;		
+			}
 
 		// Bonus is in between 250-350.
 		int forceRandom = System::random(100);

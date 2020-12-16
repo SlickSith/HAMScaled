@@ -31,11 +31,11 @@ int PlayerContainerComponent::canAddObject(SceneObject* sceneObject, SceneObject
 			const auto races = tanoData->getPlayerRaces();
 			String race = creo->getObjectTemplate()->getFullTemplateString();
 
-			if (!races->contains(race.hashCode())) {
-				errorDescription = "You lack the necessary requirements to wear this object";
+			//if (!races->contains(race.hashCode())) {
+				//errorDescription = "You lack the necessary requirements to wear this object";
 
-				return TransferErrorCode::PLAYERUSEMASKERROR;
-			}
+				//return TransferErrorCode::PLAYERUSEMASKERROR;
+			//}
 		}
 
 		if (creo->isPlayerCreature()) {
