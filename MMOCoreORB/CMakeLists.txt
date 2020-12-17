@@ -34,7 +34,7 @@ if(CMAKE_SIZEOF_VOID_P EQUAL 4)
 endif()
 
 # Set up options
-option(BUILD_IDL "Generate idl c++ sources with cmake" ON)
+option(BUILD_IDL "Generate idl c++ sources with cmake" OFF)
 option(IDL_NOPRELOCKS "Disables all prelock annotations" OFF)
 option(ENABLE_CCACHE "Enables ccache search and usage" ON)
 option(RUN_GIT "Runs git log to dump last commit messages into rev.txt" OFF)
@@ -194,7 +194,7 @@ if(COMPILE_TESTS)
     include_directories(${CMAKE_SOURCE_DIR}/utils/googletest-release-1.10.0/googlemock/include)
 
 	enable_testing()
-	
+
     add_definitions(-DCOMPILE_CORE3_TESTS)
 else(COMPILE_TESTS)
     set(IDL_DIRECTIVES ${IDL_DIRECTIVES} -nomocks)

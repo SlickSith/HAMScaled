@@ -3102,7 +3102,13 @@ bool CreatureObjectImplementation::isAttackableBy(CreatureObject* object, bool b
 				return false;
 			if (ConfigManager::instance()->getPvpMode())
 				return true;
-
+			if(ghost->isRebel() && object->isRebel())
+				return false;
+			if(ghost->isImperial() && object->isImperial())
+				return false;
+			// ! in group
+			// ! in guild
+			return true;
 			if (object->isAiAgent() && ghost->hasCrackdownTefTowards(object->getFaction())) {
 				return true;
 			}

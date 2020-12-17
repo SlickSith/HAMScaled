@@ -41,20 +41,20 @@
 --which carries forward this exception.
 
 --Determines how often exceptional and legendary items can drop.
-yellowChance = 1000 -- 1 in 1,000
-exceptionalChance = 100000 --1 in 100,000
-legendaryChance = 1000000 --1 in 1,000,000
+yellowChance = 10 -- 1 in 1,000
+exceptionalChance = 100 --1 in 100,000
+legendaryChance = 200 --1 in 1,000,000
 --yellowChance = 50 --1 in 50 for testing
 --exceptionalChance = 100 --1 in 100 for testing
 --legendaryChance = 1000 --1 in 1000 for testing
 
 --Determines how much of an increase in the base stats will be applied to the object.
-yellowModifier = 1.5
-exceptionalModifier = 2.5
-legendaryModifier = 5.0
+yellowModifier = 30.0
+exceptionalModifier = 50.0
+legendaryModifier = 100.0
 
 --The chance for random skill mods to be on looted weapons/wearables
-skillModChance = 500 -- 1 in 500
+skillModChance = 50 -- 1 in 500
 
 -- Value ranges for random dots on looted weapons (chance is set individually on the loot items)
 randomDotAttribute = {0, 8} -- See CreatureAttributes.h in src for numbers.
@@ -804,26 +804,26 @@ lootableHeavyWeaponStatMods = {
 -- Values used to generate lightsaber crystal stats
 jediCrystalStats = {
 	lightsaber_module_force_crystal = {
-		minDamage = 0,
-		maxDamage = 50,
-		minHitpoints = 700,
-		maxHitpoints = 1400,
+		minDamage = 2000,
+		maxDamage = 5000,
+		minHitpoints = 1000,
+		maxHitpoints = 2500,
 		minHealthSac = 0,
 		maxHealthSac = -9,
 		minActionSac = 0,
 		maxActionSac = -9,
 		minMindSac = 0,
 		maxMindSac = -9,
-		minAttackSpeed = 0,
-		maxAttackSpeed = -0.6,
+		minAttackSpeed = -5,
+		maxAttackSpeed = -10,
 		minForceCost = 0,
-		maxForceCost = -9.9,
+		maxForceCost = -90.9,
 		minWoundChance = 0,
 		maxWoundChance = 4,
 	},
 	lightsaber_module_krayt_dragon_pearl = {
-		minDamage = 20,
-		maxDamage = 50,
+		minDamage = 2000,
+		maxDamage = 5000,
 		minHitpoints = 900,
 		maxHitpoints = 1400,
 		minHealthSac = -6,
@@ -832,10 +832,10 @@ jediCrystalStats = {
 		maxActionSac = -9,
 		minMindSac = -6,
 		maxMindSac = -9,
-		minAttackSpeed = -0.3,
-		maxAttackSpeed = -0.6,
+		minAttackSpeed = -5,
+		maxAttackSpeed = -10,
 		minForceCost = -5.0,
-		maxForceCost = -9.9,
+		maxForceCost = -90.9,
 		minWoundChance = 2,
 		maxWoundChance = 4,
 	}
