@@ -3011,6 +3011,11 @@ bool CreatureObjectImplementation::isAggressiveTo(CreatureObject* object) {
 	if (ghost->isOnLoadScreen())
 		return false;
 
+	ManagedReference<GroupObject*> groupObject = group.get();
+	if (groupObject != nullptr && groupObject->hasMember(object)){
+		return false;
+	}
+
 	if (hasPersonalEnemyFlag(object) && object->hasPersonalEnemyFlag(asCreatureObject()))
 		return true;
 
@@ -3020,7 +3025,7 @@ bool CreatureObjectImplementation::isAggressiveTo(CreatureObject* object) {
 	if (CombatManager::instance()->areInDuel(object, asCreatureObject()))
 		return true;
 
-	if ((pvpStatusBitmask & CreatureFlag::OVERT) && (object->getPvpStatusBitmask() & CreatureFlag::OVERT) && object->getFaction() != getFaction())
+	if (object->getFaction() != getFaction())
 		return true;
 
 	if (ghost->hasBhTef() && (hasBountyMissionFor(object) || object->hasBountyMissionFor(asCreatureObject()))) {
@@ -3028,8 +3033,15 @@ bool CreatureObjectImplementation::isAggressiveTo(CreatureObject* object) {
 	}
 
 	ManagedReference<GuildObject*> guildObject = guild.get();
-	if (guildObject != nullptr && guildObject->isInWaringGuild(object))
-		return true;
+	if (guildObject != nullptr)
+	{
+		if(guildObject->hasMember(object->getObjectID())){
+			return false;
+		}
+		if(guildObject->isInWaringGuild(object)){
+			return true;
+		}
+	}
 
 	return false;
 }
@@ -3062,18 +3074,10 @@ bool CreatureObjectImplementation::isAttackableBy(TangibleObject* object, bool b
 	if (getPvpStatusBitmask() == CreatureFlag::NONE)
 		return false;
 
-	if(object->getFaction() == 0 )
+	if(object->getFaction() == 0)
 		return true;
 
 	if(object->getFaction() == getFaction())
-		return false;
-
-	// if player is on leave, then faction object cannot attack it
-	if (getFactionStatus() == FactionStatus::ONLEAVE || getFaction() == 0)
-		return false;
-
-	// if tano is overt, creature must be overt
-	if((object->getPvpStatusBitmask() & CreatureFlag::OVERT) && !(getPvpStatusBitmask() & CreatureFlag::OVERT))
 		return false;
 
 	// the other options are overt creature / overt tano  and covert/covert, covert tano, overt creature..  all are attackable
@@ -3100,12 +3104,23 @@ bool CreatureObjectImplementation::isAttackableBy(CreatureObject* object, bool b
 		if (ghost != nullptr) {
 			if (ghost->isOnLoadScreen())
 				return false;
+			if(object->getFaction() == getFaction())
+				return false;
+			ManagedReference<GroupObject*> groupObject = group.get();
+			if (groupObject != nullptr && groupObject->hasMember(object)){
+				return false;
+			}
+			ManagedReference<GuildObject*> guildObject = guild.get();
+			if (guildObject != nullptr && guildObject->hasMember(object->getObjectID())){
+				return false;
+			}
 			if (ConfigManager::instance()->getPvpMode())
 				return true;
 
 			if (object->isAiAgent() && ghost->hasCrackdownTefTowards(object->getFaction())) {
 				return true;
 			}
+			return true;
 		}
 	}
 
