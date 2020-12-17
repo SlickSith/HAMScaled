@@ -156,20 +156,19 @@ public:
 			for (int i = 0; i < closeObjects.size(); i++) {
 				SceneObject* targetObject = static_cast<SceneObject*>(closeObjects.get(i));
 				if (targetObject->isCreatureObject()) {
-					targetCreature = cast<CreatureObject*>(targetObject);
-
-					Locker locker(targetCreature, creature);
 					//Deal damage if target is an attackable creature, in range, and not a player or pet
 					if (targetCreature->isAttackableBy(creature) && creature->isInRange(targetObject, range) && !targetObject->isPlayerCreature() && !targetObject->isPet()) {
+						targetCreature = cast<CreatureObject*>(targetObject);
+						Locker locker(targetCreature, creature);
 						targetCreature->inflictDamage(creature, 0, healthDamage, true, true);
 						targetCreature->inflictDamage(creature, 3, actionDamage, true, true);
 						targetCreature->inflictDamage(creature, 6, mindDamage, true, true);
+
 					}
 				}
 			}
 			return SUCCESS;
 		}
-
 		//Deal damage to selected target
 		else {
 			//Deal damage if target is not a player or pet
