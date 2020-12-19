@@ -421,8 +421,8 @@ bool SkillManager::surrenderSkill(const String& skillName, CreatureObject* creat
 			return false;
 	}
 
-	if (skillName.beginsWith("force_") && !(JediManager::instance()->canSurrenderSkill(creature, skillName)))
-		return false;
+	//if (skillName.beginsWith("force_") && !(JediManager::instance()->canSurrenderSkill(creature, skillName)))
+	//	return false;
 
 	removeSkillRelatedMissions(creature, skill);
 
@@ -705,7 +705,7 @@ bool SkillManager::canLearnSkill(const String& skillName, CreatureObject* creatu
 		}
 
 		//Check if player has enough skill points to learn the skill.
-		if (ghost->getSkillPoints() < skill->getSkillPointsRequired()) {
+		if (!ghost->isAdmin() && ghost->getSkillPoints() < skill->getSkillPointsRequired()) {
 			return false;
 		}
 	} else {
@@ -787,7 +787,7 @@ bool SkillManager::fulfillsSkillPrerequisites(const String& skillName, CreatureO
 	if (ghost->isPrivileged())
 		return true;
 
-	if (skillName.beginsWith("force_")) {
+	if (!ghost->isAdmin() && skillName.beginsWith("force_")) {
 		return JediManager::instance()->canLearnSkill(creature, skillName);
 	}
 

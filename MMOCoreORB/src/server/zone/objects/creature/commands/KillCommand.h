@@ -49,7 +49,6 @@ public:
 		int mindDamage = healthDamage;
 		long long creatureID = creature->getObjectID();
 
-
 		// Initialize components used to kill nearby creatures
 		bool area = false;
 		float range = 64;
@@ -157,31 +156,28 @@ public:
 					// Deal damage if target is an attackable creature, in range, and not a player or pet
 					if (targetCreature->isAttackableBy(creature) && creature->isInRange(targetObject, range) && !targetObject->isPlayerCreature() &&
 						!targetObject->isPet()) {
+						SceneObject* creatureInventory = targetCreature->getSlottedObject("inventory");
 
-					SceneObject* creatureInventory = targetCreature->getSlottedObject("inventory");
+						if (creatureInventory != nullptr && creature != nullptr && creature->isPlayerCreature()) {
+							LootManager* lootManager = creature->getZoneServer()->getLootManager();
 
-					if (creatureInventory != nullptr && creature != nullptr && creature->isPlayerCreature()) {
-						LootManager* lootManager = creature->getZoneServer()->getLootManager();
+							if (targetCreature->isNonPlayerCreatureObject()) {
+								targetCreature->clearCashCredits();
+								int credits = lootManager->calculateLootCredits(targetCreature->getLevel());
+								TransactionLog trx(TrxCode::NPCLOOT, targetCreature, credits, true);
+								trx.addState("destructor", creatureID);
+								targetCreature->addCashCredits(credits);
+							}
 
-						if (targetCreature->isNonPlayerCreatureObject()) {
-							targetCreature->clearCashCredits();
-							int credits = lootManager->calculateLootCredits(targetCreature->getLevel());
-							TransactionLog trx(TrxCode::NPCLOOT, targetCreature, credits, true);
-							trx.addState("destructor", creatureID);
-							targetCreature->addCashCredits(credits);
-						}
+							Locker locker(creatureInventory);
+							TransactionLog trx(TrxCode::NPCLOOT, targetCreature);
+							creatureInventory->setContainerOwnerID(creatureID);
 
-						Locker locker(creatureInventory);
-
-						TransactionLog trx(TrxCode::NPCLOOT, targetCreature);
-						creatureInventory->setContainerOwnerID(creatureID);
-
-						if (lootManager->createLoot(trx, creatureInventory, cast<AiAgent*>(targetObject))) {
-							trx.commit(true);
-						} else {
-							trx.abort() << "createLoot failed for ai object.";
-						}
-
+							if (lootManager->createLoot(trx, creatureInventory, cast<AiAgent*>(targetObject))) {
+								trx.commit(true);
+							} else {
+								trx.abort() << "createLoot failed for ai object.";
+							}
 						}
 						targetCreature->inflictDamage(creature, 0, healthDamage, true, true);
 						targetCreature->inflictDamage(creature, 3, actionDamage, true, true);

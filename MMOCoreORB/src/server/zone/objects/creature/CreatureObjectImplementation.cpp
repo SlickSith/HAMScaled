@@ -3064,6 +3064,9 @@ bool CreatureObjectImplementation::isAttackableBy(TangibleObject* object, bool b
 	if (ghost->isOnLoadScreen())
 		return false;
 
+	if(ghost->isLinkDead())
+		return false;
+
 	if ((!bypassDeadCheck && (isDead() || (isIncapacitated() && !isFeigningDeath()))) || isInvisible())
 		return false;
 
@@ -3071,13 +3074,13 @@ bool CreatureObjectImplementation::isAttackableBy(TangibleObject* object, bool b
 		return true;
 	}
 
-	if (getPvpStatusBitmask() == CreatureFlag::NONE)
-		return false;
+	//if (getPvpStatusBitmask() == CreatureFlag::NONE)
+	//	return false;
 
 	if(object->getFaction() == 0)
 		return true;
 
-	if(object->getFaction() == getFaction())
+	if(object->getFaction() == getFaction() && getFaction() != 0)
 		return false;
 
 	// the other options are overt creature / overt tano  and covert/covert, covert tano, overt creature..  all are attackable
@@ -3104,7 +3107,7 @@ bool CreatureObjectImplementation::isAttackableBy(CreatureObject* object, bool b
 		if (ghost != nullptr) {
 			if (ghost->isOnLoadScreen())
 				return false;
-			if(object->getFaction() == getFaction())
+			if(object->getFaction() == getFaction() && getFaction() != 0)
 				return false;
 			ManagedReference<GroupObject*> groupObject = group.get();
 			if (groupObject != nullptr && groupObject->hasMember(object)){

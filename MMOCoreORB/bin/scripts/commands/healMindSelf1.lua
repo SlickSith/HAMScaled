@@ -43,7 +43,7 @@
 
 HealMindSelf1Command = {
 	name = "healmindself1",
-	healAmount = 500,
+	healAmount = 6000,
 	forceCost = 40,
 	forceCostMultiplier = 0.05,
 	defaultTime = 6,
